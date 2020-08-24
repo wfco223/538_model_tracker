@@ -11,9 +11,9 @@ def app(arg_1, arg_2):
   import numpy as np
   import os
 
-  files = sorted(os.listdir('./ev_probs'))
+  files = sorted(os.listdir('./total_ev'))
 
-  if pd.read_csv('./ev_probs/' + files[-1])['timestamp'][0] != pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")['timestamp'][0]:
+  if pd.read_csv('./total_ev/' + files[-1])['timestamp'][0] != pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")['timestamp'][0]:
     df = pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")
     df = df.sort_values(by = 'total_ev')
 
@@ -21,9 +21,9 @@ def app(arg_1, arg_2):
     combined.head()
 
     dt = datetime.datetime.today()
-    df.to_csv('/ev_probs/' + str(dt) + '.csv')
+    df.to_csv('/total_ev/' + str(dt) + '.csv')
 
-    files = sorted(os.listdir('./ev_probs'))
+    files = sorted(os.listdir('./total_ev'))
 
     print('new', files[-1][:16])
   else:
@@ -34,8 +34,8 @@ def app(arg_1, arg_2):
     else:
       print('Done. Most recent update', round(delta.total_seconds() // 3600), 'hours and', round((delta.total_seconds() % 3600)/60), 'minutes ago')
 
-  df1 = pd.read_csv('./ev_probs/' + files[1])
-  df2 = pd.read_csv('./ev_probs/' + files[-1])
+  df1 = pd.read_csv('./total_ev/' + files[1])
+  df2 = pd.read_csv('./total_ev/' + files[-1])
   differences = pd.DataFrame({'total_ev': df2['total_ev'], 'differences': df2['evprob_inc'] - df2['evprob_chal']})
   differences = differences.tail(269)
 
