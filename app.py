@@ -3,7 +3,8 @@ app = Flask(__name__)
 
 @app.route('/')
 
-def app():
+def app(arg_1, arg_2):
+  print(arg_1, arg_2)
   import pandas as pd
   import matplotlib.pyplot as plt
   import datetime
