@@ -65,7 +65,7 @@ def plotview():
         else: 
             plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
     
-    plt.savefig('/static/images/new_plot.png')
+    plt.savefig('/var/data/new_plot.png')
     
-    return render_template('image.html', name = 'new_plot', url ='/static/images/new_plot.png')
+    return render_template('image.html', name = 'new_plot', url ='/var/data/new_plot.png')
     
