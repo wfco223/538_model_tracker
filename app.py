@@ -64,6 +64,6 @@ def app(arg_1, arg_2):
 
   plt.show()
 
-  pre = datetime.datetime.strptime(files[1][:-4], '%Y-%m-%d %H:%M:%S.%f')
-  post = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H:%M:%S.%f')
+  pre = datetime.datetime.strptime(files[1][:-4], '%Y-%m-%d %H_%M_%S.%f')
+  post = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
   print('pre:  ', pre, '\n', 'post: ', post, '\n', post - pre, sep = '')
