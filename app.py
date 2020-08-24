@@ -66,4 +66,4 @@ def app(arg_1, arg_2):
   post = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
   
   message = "pre:  " + str(pre) + '\n' + 'post: ' + str(post) + "\n" + str(post - pre)
-  return(message)
+  return(bytes(message, 'utf-8')]
