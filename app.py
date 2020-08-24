@@ -46,24 +46,23 @@ def app(arg_1, arg_2):
   x_arr_new = differences_new['differences'] 
   y_arr = differences_new['total_ev']
 
-  plt.figure(figsize=(10, 20))
+  fig = plt.figure(figsize=(10, 20))
 
   for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
       if x2 < x1:
-        plt.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
+        fig.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
       else: 
-        plt.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
+        fig.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
 
       if x2 < 0:
-        plt.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
+        fig.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
       else: 
-        plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
+        fig.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
 
-  plt.plot([0, 0], [269, 538], '--')
-  plt.plot([x_arr_new.min(), x_arr_old.max()], [269, 269], '-', color = 'black')
-
-  plt.show()
+  fig.plot([0, 0], [269, 538], '--')
+  fig.plot([x_arr_new.min(), x_arr_old.max()], [269, 269], '-', color = 'black')
 
   pre = datetime.datetime.strptime(files[1][:-4], '%Y-%m-%d %H_%M_%S.%f')
   post = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
   print('pre:  ', pre, '\n', 'post: ', post, '\n', post - pre, sep = '')
+  return(fig)
