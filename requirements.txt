@@ -1,0 +1,5 @@
+pandas
+matplotlib.pyplot
+datetime
+numpy
+os
