@@ -65,4 +65,5 @@ def app(arg_1, arg_2):
   pre = datetime.datetime.strptime(files[1][:-4], '%Y-%m-%d %H_%M_%S.%f')
   post = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
   
-  return(pre, post, post - pre)
+  message = "pre:  " + pre + '\n' + 'post: ' + post + "\n" + post - pre
+  return(message)
