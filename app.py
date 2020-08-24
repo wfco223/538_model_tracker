@@ -50,17 +50,17 @@ def app(arg_1, arg_2):
 
   for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
       if x2 < x1:
-        fig.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
+        plt.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
       else: 
-        fig.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
+        plt.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
 
       if x2 < 0:
-        fig.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
+        plt.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
       else: 
-        fig.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
+        plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
 
-  fig.plot([0, 0], [269, 538], '--')
-  fig.plot([x_arr_new.min(), x_arr_old.max()], [269, 269], '-', color = 'black')
+  plt.plot([0, 0], [269, 538], '--')
+  plt.plot([x_arr_new.min(), x_arr_old.max()], [269, 269], '-', color = 'black')
 
   pre = datetime.datetime.strptime(files[1][:-4], '%Y-%m-%d %H_%M_%S.%f')
   post = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
