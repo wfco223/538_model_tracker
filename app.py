@@ -7,6 +7,7 @@ import datetime
 import numpy as np
 import os
 import io
+import base64
 
 app = Flask(__name__)
 
@@ -48,15 +49,9 @@ y_arr = differences_new['total_ev']
 plt.plot([0, 0], [269, 538], '--')
 plt.plot([x_arr_new.min(), x_arr_old.max()], [269, 269], '-', color = 'black')
 
-@app.route('/')
+@app.route('/', methods = ["GET"])
 
-def plot_png():
-    fig = create_figure()
-    output = io.BytesIO()
-    FigureCanvas(fig).print_png(output)
-    return Response(output.getvalue(), mimetype='image/png')
-
-def create_figure():
+def plotview():
     fig = Figure()
     axis = fig.add_subplot(1, 1, 1)
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
@@ -69,4 +64,11 @@ def create_figure():
         axis.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
       else: 
         axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
-    return fig
+    
+    pngImage = io.BytesIO()
+    FigureCanvas(fig).print_png(pngImage)
+    
+    pngImageB64String = "data:image/png;base64,"
+    pngImageB64String + base64.b64encode(pngImage.getvalue()).decode('utf8')
+    
+    return render_template("image.html", image = pngImageB64String)
