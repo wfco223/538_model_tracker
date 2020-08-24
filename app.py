@@ -26,13 +26,13 @@ if pd.read_csv('./total_ev/' + files[-1])['timestamp'][0] != pd.read_csv("https:
     files = sorted(os.listdir('./total_ev'))
 
     print('new', files[-1][:16])
-  else:
+else:
     latest_dt = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
     delta = datetime.datetime.now() - latest_dt
     if delta.total_seconds() // 3600 < 1:
-      print('Done. Most recent update', round(delta.total_seconds()/60), 'minutes ago')
+        print('Done. Most recent update', round(delta.total_seconds()/60), 'minutes ago')
     else:
-      print('Done. Most recent update', round(delta.total_seconds() // 3600), 'hours and', round((delta.total_seconds() % 3600)/60), 'minutes ago')
+        print('Done. Most recent update', round(delta.total_seconds() // 3600), 'hours and', round((delta.total_seconds() % 3600)/60), 'minutes ago')
 
 df1 = pd.read_csv('./total_ev/' + files[1])
 df2 = pd.read_csv('./total_ev/' + files[-1])
@@ -46,24 +46,24 @@ y_arr = differences_new['total_ev']
 
 
 
-plt.plot([0, 0], [269, 538], '--')
-plt.plot([x_arr_new.min(), x_arr_old.max()], [269, 269], '-', color = 'black')
-
 @app.route('/', methods = ["GET"])
 
 def plotview():
     fig = Figure()
     axis = fig.add_subplot(1, 1, 1)
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
-      if x2 < x1:
-        axis.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
-      else: 
-        axis.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
+        if x2 < x1:
+            axis.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
+        else: 
+            axis.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
 
-      if x2 < 0:
-        axis.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
-      else: 
-        axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
+        if x2 < 0:
+            axis.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
+        else: 
+            axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
+    
+    axis.plot([0, 0], [269, 538], '--')
+    axis.plot([x_arr_new.min(), x_arr_old.max()], [269, 269], '-', color = 'black')
     
     pngImage = io.BytesIO()
     FigureCanvas(fig).print_png(pngImage)
