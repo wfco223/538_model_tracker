@@ -49,26 +49,23 @@ y_arr = differences_new['total_ev']
 @app.route('/', methods = ["GET"])
 
 def plotview():
-    fig = Figure()
-    axis = fig.add_subplot(1, 1, 1)
+    plt.figure(figsize=(10, 20))
+
+    plt.plot([0, 0], [268, 538], '--', color = 'black')
+
+
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
-            axis.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
+            plt.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
         else: 
-            axis.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
+            plt.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
 
         if x2 < 0:
-            axis.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
+            plt.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
         else: 
-            axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
+            plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
     
-    axis.plot([0, 0], [269, 538], '--')
-    axis.plot([x_arr_new.min(), x_arr_old.max()], [269, 269], '-', color = 'black')
+    plt.savefig('/static/images/new_plot.png')
     
-    pngImage = io.BytesIO()
-    FigureCanvas(fig).print_png(pngImage)
+    return render_template('image.html', name = 'new_plot', url ='/static/images/new_plot.png')
     
-    pngImageB64String = "data:image/png;base64,"
-    pngImageB64String + base64.b64encode(pngImage.getvalue()).decode('utf8')
-    
-    return render_template("image.html", image = pngImageB64String)
