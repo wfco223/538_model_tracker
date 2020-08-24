@@ -4,7 +4,7 @@ app = Flask(__name__)
 @app.route('/')
 
 def app(arg_1, arg_2):
-  print(arg_1, arg_2)
+
   import pandas as pd
   import matplotlib.pyplot as plt
   import datetime
@@ -64,5 +64,5 @@ def app(arg_1, arg_2):
 
   pre = datetime.datetime.strptime(files[1][:-4], '%Y-%m-%d %H_%M_%S.%f')
   post = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
-  print('pre:  ', pre, '\n', 'post: ', post, '\n', post - pre, sep = '')
-  return(fig)
+  
+  return(pre, post, post - pre)
