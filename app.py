@@ -27,7 +27,7 @@ def app(arg_1, arg_2):
 
     print('new', files[-1][:16])
   else:
-    latest_dt = datetime.datetime.strptime(files[-1][:-4], '%Y_%m_%d %H:%M:%S.%f')
+    latest_dt = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
     delta = datetime.datetime.now() - latest_dt
     if delta.total_seconds() // 3600 < 1:
       print('Done. Most recent update', round(delta.total_seconds()/60), 'minutes ago')
