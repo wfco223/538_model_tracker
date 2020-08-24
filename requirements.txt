@@ -4,5 +4,4 @@ datetime
 numpy
 flask
 Gunicorn
-io
 base64
