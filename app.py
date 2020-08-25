@@ -97,10 +97,11 @@ def make_plot(path_1, path_2):
     render_path = '/var/data/plots/' + df2['timestamp'][0] + '.png'
     plt.savefig(render_path)
     
-    static_path = 'static/images/' + str(datetime.datetime.now()) + '.png'
+    path = 'images/' + str(datetime.datetime.now()) + '.png'
+    static_path = 'static/' + path
     plt.savefig(static_path)
     plt.close()
-    path = 'images/' + str(datetime.datetime.now()) + '.png'
+    
     
     return path
     
