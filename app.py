@@ -23,7 +23,7 @@ def plotview():
     
     plot_path = make_plot(files[0], probs_path)
     
-    return render_template("image.html", mess = message, name = plot_path)
+    return render_template("image.html", mess = message)
 
 def update_probs():
    
