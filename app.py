@@ -62,19 +62,25 @@ def make_plot(path_1, path_2):
     x_arr_old = differences_old['differences']
     x_arr_new = differences_new['differences'] 
     y_arr = differences_new['total_ev']
-        
+    
+    x_max = x_arr_new.max()
+    x_min = x_arr_new.min()
+    y_max = y_arr_new.max()
+    y_min = y_arr_new.min()
+    
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
             plt.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
-            plt.text(x2, y, 'test')
         else: 
             plt.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
 
         if x2 < 0:
             plt.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
+            plt.plot([xmin, x2], [y,y], '-', color = 'blue')
         else: 
             plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
-       
+            plt.plot([x2, xmax], [y,y], '-', color = 'red')
+            
         if x2 <= -.01:
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
