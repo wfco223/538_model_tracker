@@ -45,14 +45,8 @@ def update_probs():
         message = ('New update. Model last updated at ' + files[-1][:-4], '/var/data/probs/' + new_ts_rearr + '.csv')
         
     else:
-        latest_dt = datetime.datetime.strptime(files[-1][:-4], '%b %d %Y %H:%M:%S')
-        delta = (datetime.datetime.now(pytz.timezone('US/Eastern')) - latest_dt).total_seconds()
-        print(latest_dt, datetime.datetime.now(), delta, datetime.datetime.now() - latest_dt)
-        if delta // 3600 < 1:
-            message = ('Done. Most recent update ' + str(round(delta/60)) + ' minutes ago.', '/var/data/probs/' + files[-1])
-        else:
-            message = ('No update. Model last updated at ' + str(round(delta // 3600)) + ' hours and ' + str(round((delta % 3600)/60)) + ' minutes ago.', '/var/data/probs/' + files[-1])
-    
+        message = ('No update. Most recent update at ' + files[-1][:-4] + '.', '/var/data/probs/' + files[-1])
+            
     return(message)
         
 def make_plot(path_1, path_2):
