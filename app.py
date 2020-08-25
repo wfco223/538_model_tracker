@@ -65,7 +65,9 @@ def make_plot(path_1, path_2):
     y_arr = differences_new['total_ev']
     
     top_five = x_arr_new.sort_values()
-    print(top_five.values)
+    
+    biden_top_five = top_five[4]
+    trump_top_five = top_five[-5]
     
     plt.xlim(-.025, .025)   # set the xlim to left, right
     plt.ylim(269, 538)
@@ -83,13 +85,13 @@ def make_plot(path_1, path_2):
             plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
             
             
-        if x2 <= -.01:
+        if x2 <= biden_top_five:
             s = str(y)
             print(s)
             plt.annotate(s, (-.025, y-1))
             
                 
-        elif x2 > .01:
+        elif x2 > trump_top_five:
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
             
