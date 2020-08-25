@@ -75,12 +75,14 @@ def make_plot(path_1, path_2):
             plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
         
         s = 'ev: ' + str(y) + ' net prob: ' + str(round(x2 * 100, 2) + '%'
-        print(s)
+        
                 
         if x2 < -.01:
+            print(s)
             plt.text(x2, y, s)
                 
         elif x2 > .01:
+            print(s)
             plt.text(x2, y, s)
             
     path = '/var/data/plots' + df2['timestamp'][0] + '.png'
