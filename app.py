@@ -45,7 +45,7 @@ def update_probs():
     else:
         latest_dt = datetime.datetime.strptime(files[-1][:-4], '%b %d %Y %H:%M:%S')
         print(latest_dt)
-        delta = (datetime.datetime.now(tz = “EDT”) - latest_dt)
+        delta = (datetime.datetime.now() - latest_dt) - 3600
         print(delta, delta.total_seconds())
         if delta.total_seconds() // 3600 < 1:
             message = ('Done. Most recent update ' + str(round(delta.total_seconds()/60)) + ' minutes ago.', '/var/data/probs/' + files[-1])
