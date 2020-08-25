@@ -13,7 +13,7 @@ import pytz
 
 app = Flask(__name__)
 
-@app.route('/', methods = ["GET"])
+@app.route('/', methods = ["POST", "GET"])
 
 def plotview():
     
@@ -23,7 +23,7 @@ def plotview():
     
     plot_path = make_plot(files[0], probs_path)
     
-    return render_template("image.html", mess = message, filename = plot_path)
+    return render_template("image.html", mess = message, image = plot_path)
 
 def update_probs():
    
