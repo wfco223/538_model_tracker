@@ -76,7 +76,7 @@ def make_plot(path_1, path_2):
         if x2 < 0:
             plt.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
         else: 
-            plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max(
+            plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
         
         s = 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%'
         print(s)
