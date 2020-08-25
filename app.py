@@ -11,20 +11,20 @@ import base64
 
 app = Flask(__name__)
 
-files = sorted(os.listdir('/var/data/probs/'))
-
 @app.route('/', methods = ["GET"])
 
-def plotview(files):
+def plotview():
     
-    message, probs_path = update_probs(files)
+    message, probs_path = update_probs()
     
     plot_path = make_plot(files[0], probs_path)
     
     return str(message + '\n' + '<img src = ' + plot_path + '>')
 
-def update_probs(files):
+def update_probs():
    
+    files = sorted(os.listdir('/var/data/probs/'))
+    
     if pd.read_csv('/var/data/probs/' + files[-1])['timestamp'][0] != pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")['timestamp'][0]:
         df = pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")
         df = df.sort_values(by = 'total_ev')
