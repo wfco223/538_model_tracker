@@ -8,6 +8,8 @@ import numpy as np
 import os
 import io
 import base64
+import pytz
+
 
 app = Flask(__name__)
 
@@ -44,7 +46,7 @@ def update_probs():
         
     else:
         latest_dt = datetime.datetime.strptime(files[-1][:-4], '%b %d %Y %H:%M:%S')
-        delta = (datetime.datetime.now() - latest_dt).total_seconds() - 3600
+        delta = (datetime.datetime.now(pytz.timezone('US/Eastern')) - latest_dt).total_seconds()
         print(latest_dt, datetime.datetime.now(), delta, datetime.datetime.now() - latest_dt)
         if delta // 3600 < 1:
             message = ('Done. Most recent update ' + str(round(delta/60)) + ' minutes ago.', '/var/data/probs/' + files[-1])
