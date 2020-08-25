@@ -91,7 +91,7 @@ def make_plot(path_1, path_2):
             print(s)
             plt.text(x2, y, s)
             
-    path = '/var/data/plots' + df2['timestamp'][0] + '.png'
+    path = '/var/data/plots/' + df2['timestamp'][0] + '.png'
     plt.savefig(path)
                 
     plt.savefig('static/images/plot.png')
