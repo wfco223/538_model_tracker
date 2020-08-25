@@ -64,6 +64,8 @@ def make_plot(path_1, path_2):
     x_arr_old = differences_old['differences']
     x_arr_new = differences_new['differences'] 
     y_arr = differences_new['total_ev']
+    
+    xmin, xmax = axis.get_xlim()
 
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
@@ -77,9 +79,9 @@ def make_plot(path_1, path_2):
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
             
         if x2 < -.01:
-            axis.annotate('ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%', (-10, 0), textcoords = 'offset pixels')
+            axis.annotate('ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%', (xmin, y))
         elif x2 > .01:
-            axis.annotate('ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%', (10, 0), textcoords = 'offset pixels')
+            axis.annotate('ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%', (xmax, y))
     
     path = '/var/data/plots' + df2['timestamp'][0] + '.png'
     fig.savefig(path, bbox_inches='tight')
