@@ -52,6 +52,7 @@ def update_probs():
 def make_plot(path_1, path_2):
     
     plt.plot([0, 0], [268, 538], '--', color = 'black')
+    plt.figure(figsize=(10, 20))
     
     df1 = pd.read_csv('/var/data/probs/' + path_1)
     df2 = pd.read_csv(path_2)
