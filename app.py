@@ -66,8 +66,8 @@ def make_plot(path_1, path_2):
     
     top_five = x_arr_new.sort_values()
     
-    biden_top_five.values = top_five[4]
-    trump_top_five.values = top_five[-5]
+    biden_top_five = top_five.values[4]
+    trump_top_five = top_five.values[-5]
     
     plt.xlim(-.025, .025)   # set the xlim to left, right
     plt.ylim(269, 538)
