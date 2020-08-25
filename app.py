@@ -69,7 +69,7 @@ def make_plot(path_1, path_2):
     ymin, ymax = axis.get_ylim()
     
     print(xmin, xmax, ymin, ymax)
-
+    
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
             axis.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
@@ -80,11 +80,12 @@ def make_plot(path_1, path_2):
             axis.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
         else: 
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
-            
+        
+        s = 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%'
         if x2 < -.01:
-            axis.text(x2, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
-            plt.text(x2, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
-            fig.text(x2, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
+            axis.text(x2, y, s)
+            plt.text(x2, y, s)
+            fig.text(x2, y, s)
         elif x2 > .01:
             fig.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
             plt.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
