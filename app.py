@@ -89,9 +89,9 @@ def make_plot(path_1, path_2):
             plt.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
             
     path = '/var/data/plots' + df2['timestamp'][0] + '.png'
-    fig.savefig(path, bbox_inches='tight')
+    fig.savefig(path)
                 
-    fig.savefig('static/images/plot.png', bbox_inches='tight')
+    fig.savefig('static/images/plot.png')
     filepath = 'static/images/plot.png'
     
     return filepath
