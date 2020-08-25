@@ -24,9 +24,7 @@ def plotview():
     return str(message + '\n' + '<img src = ' + plot_path + '>')
 
 def update_probs():
-    
-    most_recent_timestamp = files[-1])['timestamp'][0]
-    most_recent_timestamp_rearr = most_recent_timestamp[12:16] + most_recent_timestamp[9:12] + most_recent_timestamp[17:21] + most_recent_timestamp[0:
+   
     if pd.read_csv('/var/data/probs/' + files[-1])['timestamp'][0] != pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")['timestamp'][0]:
         df = pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")
         df = df.sort_values(by = 'total_ev')
