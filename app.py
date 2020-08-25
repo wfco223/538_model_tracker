@@ -82,9 +82,9 @@ def make_plot(path_1, path_2):
             axis.annotate('ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%', (10, 0), textcoords = 'offset pixels')
     
     path = '/var/data/plots' + df2['timestamp'][0] + '.png'
-    fig.savefig(path)
+    fig.savefig(path, bbox_inches='tight')
                 
-    fig.savefig('static/images/plot.png')
+    fig.savefig('static/images/plot.png', bbox_inches='tight')
     filepath = 'static/images/plot.png'
     
     return filepath
