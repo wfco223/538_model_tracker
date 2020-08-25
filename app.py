@@ -54,8 +54,7 @@ def update_probs():
         
 def make_plot(path_1, path_2):
     
-    fig = plt.figure(figsize=(10, 20))
-    axis = fig.add_subplot(1, 1, 1)
+    fig, axis = plt.subplots(nrows=1, ncols=1, figsize = (10, 20))  # create figure & 1 axis
 
     axis.plot([0, 0], [268, 538], '--', color = 'black')
     
@@ -81,6 +80,7 @@ def make_plot(path_1, path_2):
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
     
     filepath = '/var/data/plots/' + df2['timestamp'][0] + '.png'
+    
     fig.save_fig(filepath)
                                           
     return filepath
