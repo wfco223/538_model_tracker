@@ -74,10 +74,9 @@ def make_plot(path_1, path_2):
         else: 
             plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
         
-        s = 'ev: ' + str(y) + ' net prob: ' + str(round(x2 * 100, 2) + '%'
-        
-                
-        if x2 < -.01:
+        s = 'ev: ' + str(y) + ' net prob: ' + str(round(x2 * 100, 2)) + '%'
+            
+        if x2 <= -.01:
             print(s)
             plt.text(x2, y, s)
                 
