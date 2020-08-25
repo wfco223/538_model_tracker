@@ -46,9 +46,9 @@ def update_probs():
         latest_dt = datetime.datetime.strptime(files[-1][:-4], '%b %d %Y %H:%M:%S')
         delta = datetime.datetime.now() - latest_dt
         if delta.total_seconds() // 3600 < 1:
-            message = ('Done. Most recent update ' + str(round(delta.total_seconds()/60)) + ' minutes ago.', files[-1])
+            message = ('Done. Most recent update ' + str(round(delta.total_seconds()/60)) + ' minutes ago.', '/var/data/probs/' + files[-1] + '.csv')
         else:
-            message = ('Done. Most recent update ' + str(round(delta.total_seconds() // 3600)) + ' hours and ' + str(round((delta.total_seconds() % 3600)/60)) + ' minutes ago.', files[-1])
+            message = ('Done. Most recent update ' + str(round(delta.total_seconds() // 3600)) + ' hours and ' + str(round((delta.total_seconds() % 3600)/60)) + ' minutes ago.', '/var/data/probs/' + files[-1] + '.csv')
     
     return(message)
         
