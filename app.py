@@ -83,9 +83,9 @@ def make_plot(path_1, path_2):
         
         s = 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%'
         if x2 < -.01:
-            axis.text(x2, y, s)
-            plt.text(x2, y, s)
-            fig.text(x2, y, s)
+            axis.text(float(x2), float(y), s)
+            plt.text(float(x2), float(y), s)
+            fig.text(float(x2), float(y), s)
         elif x2 > .01:
             fig.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
             plt.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
