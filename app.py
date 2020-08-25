@@ -79,8 +79,10 @@ def make_plot(path_1, path_2):
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
             
         if x2 < -.01:
+            print('here')
             axis.text(-0.015, 300, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
         elif x2 > .01:
+            print('here')
             axis.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
     
     path = '/var/data/plots' + df2['timestamp'][0] + '.png'
