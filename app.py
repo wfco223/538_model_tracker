@@ -104,7 +104,7 @@ def make_plot(path_1, path_2):
     
     path = 'images/' + str(datetime.datetime.now()) + '.png'
     static_path = 'static/' + path
-    plt.savefig(static_path)
+    plt.savefig(static_path, bbox_inches='tight')
     plt.close()
     
     
