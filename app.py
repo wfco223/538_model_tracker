@@ -83,7 +83,7 @@ def make_plot(path_1, path_2):
         if x2 <= -.01:
             s = str(y)
             print(s)
-            plt.annotate(s, (-.025, y))
+            plt.annotate(s, (-.025, y-1))
             
                 
         elif x2 > .01:
