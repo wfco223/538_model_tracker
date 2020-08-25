@@ -91,9 +91,10 @@ def make_plot(path_1, path_2):
             plt.annotate(s, (-.025, y-1))
             
                 
-        elif x2 > trump_top_five:
-            s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
+        elif x2 >= trump_top_five:
+            s = str(y)
             print(s)
+            plt.annotate(s, (.025, y-1))
             
     for filename in os.listdir('static/images/'):
         os.remove('static/images/' + filename)
