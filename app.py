@@ -51,8 +51,8 @@ def update_probs():
         
 def make_plot(path_1, path_2):
     
-    plt.plot([0, 0], [268, 538], '--', color = 'black')
     plt.figure(figsize=(10, 20))
+    plt.plot([0, 0], [268, 538], '--', color = 'black')
     
     df1 = pd.read_csv('/var/data/probs/' + path_1)
     df2 = pd.read_csv(path_2)
@@ -85,7 +85,7 @@ def make_plot(path_1, path_2):
         if x2 <= -.01:
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
-            plt.annotate(s, (0, 270/y), xycoords = 'figure fraction')
+            plt.annotate(s, (0, (y + 270)/270), xycoords = 'figure fraction')
             
                 
         elif x2 > .01:
