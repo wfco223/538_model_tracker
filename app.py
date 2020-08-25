@@ -13,47 +13,57 @@ app = Flask(__name__)
 
 files = sorted(os.listdir('/var/data/probs/'))
 
-if pd.read_csv('/var/data/probs/' + files[-1])['timestamp'][0] != pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")['timestamp'][0]:
-    df = pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")
-    df = df.sort_values(by = 'total_ev')
-
-    combined = pd.DataFrame({'biden_probs': df['evprob_chal'], 'trump_probs': df['evprob_inc']})
-    combined.head()
-
-    dt = datetime.datetime.today()
-    df.to_csv('/var/data/probs/' + str(dt) + '.csv')
-
-    files = sorted(os.listdir('/var/data/probs/'))
-
-    print('new', files[-1][:16])
-else:
-    latest_dt = datetime.datetime.strptime(files[-1][:-4], '%Y-%m-%d %H_%M_%S.%f')
-    delta = datetime.datetime.now() - latest_dt
-    if delta.total_seconds() // 3600 < 1:
-        print('Done. Most recent update', round(delta.total_seconds()/60), 'minutes ago')
-    else:
-        print('Done. Most recent update', round(delta.total_seconds() // 3600), 'hours and', round((delta.total_seconds() % 3600)/60), 'minutes ago')
-
-df1 = pd.read_csv('/var/data/probs/' + files[1])
-df2 = pd.read_csv('/var/data/probs/' + files[-1])
-
-differences_old = pd.DataFrame({'total_ev': df1['total_ev'], 'differences': df1['evprob_inc'] - df1['evprob_chal'], 'alpha': df1['evprob_inc'] + df1['evprob_chal']}).tail(269)
-differences_new = pd.DataFrame({'total_ev': df2['total_ev'], 'differences': df2['evprob_inc'] - df2['evprob_chal'], 'alpha': df2['evprob_inc'] + df2['evprob_chal']}).tail(269)
-
-x_arr_old = differences_old['differences']
-x_arr_new = differences_new['differences'] 
-y_arr = differences_new['total_ev']
-
-
-
 @app.route('/', methods = ["GET"])
 
 def plotview():
+    
+    message, probs_path = update_probs()
+    
+    plot_path = make_plot(files[0], probs_path)
+    
+    return str(message + '\n' + '<img src = ' + plot_path + '>')
+
+def update_probs():
+    
+    if pd.read_csv('/var/data/probs/' + files[-1])['timestamp'][0] != pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")['timestamp'][0]:
+        df = pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")
+        df = df.sort_values(by = 'total_ev')
+
+        combined = pd.DataFrame({'biden_probs': df['evprob_chal'], 'trump_probs': df['evprob_inc']})
+        combined.head()
+
+        df.to_csv('/var/data/probs/' + df['timestamp'][0] + '.csv')
+
+        files = sorted(os.listdir('/var/data/probs/'))
+
+        message = ('new' + files[-1][:-4], '/var/data/probs/' + df['timestamp'][0] + '.csv')
+        
+    else:
+        latest_dt = datetime.datetime.strptime(files[-1][:-4], '%H:%M:%S %d %b %Y')
+        delta = datetime.datetime.now() - latest_dt
+        if delta.total_seconds() // 3600 < 1:
+            message = 'Done. Most recent update ' + str(round(delta.total_seconds()/60)) + ' minutes ago.', files[-1])
+        else:
+            message = 'Done. Most recent update' + str(round(delta.total_seconds() // 3600)) + ' hours and ' str(round((delta.total_seconds() % 3600)/60)) + ' minutes ago.', files[-1])
+    
+    return(message)
+        
+def make_plot(path_1, path_2):
     
     fig = Figure()
     axis = fig.add_subplot(1, 1, 1)
 
     axis.plot([0, 0], [268, 538], '--', color = 'black')
+    
+    df1 = pd.read_csv('/var/data/probs/' + path_1)
+    df2 = pd.read_csv('/var/data/probs/' + path_2)
+
+    differences_old = pd.DataFrame({'total_ev': df1['total_ev'], 'differences': df1['evprob_inc'] - df1['evprob_chal'], 'alpha': df1['evprob_inc'] + df1['evprob_chal']}).tail(269)
+    differences_new = pd.DataFrame({'total_ev': df2['total_ev'], 'differences': df2['evprob_inc'] - df2['evprob_chal'], 'alpha': df2['evprob_inc'] + df2['evprob_chal']}).tail(269)
+
+    x_arr_old = differences_old['differences']
+    x_arr_new = differences_new['differences'] 
+    y_arr = differences_new['total_ev']
 
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
@@ -66,10 +76,8 @@ def plotview():
         else: 
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
     
-    canvas = FigureCanvas(fig)
-    output = io.BytesIO()
-    canvas.print_png(output)
-    response = make_response(output.getvalue())
-    response.mimetype = 'image/png'
-    return response
+    filepath = '/var/data/plots/' + df2['timestamp][0] + '.png'
+    fig.save_fig(filepath)
+                                          
+    return filepath
     
