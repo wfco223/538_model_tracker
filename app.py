@@ -45,7 +45,7 @@ def update_probs():
         message = ('New update. Model last updated at ' + files[-1][:-4], '/var/data/probs/' + new_ts_rearr + '.csv')
         
     else:
-        message = ('No update. Most recent update at ' + files[-1][:-4] + '.', '/var/data/probs/' + files[-1])
+        message = ('No update. Most recent update at ' + files[-1][:13] + str(int(files[-1][13]) - 1) + files[-1][14:-4] + '.', '/var/data/probs/' + files[-1])
             
     return(message)
         
