@@ -23,7 +23,7 @@ def plotview():
     
     plot_path = make_plot(files[0], probs_path)
     
-    return render_template("image.html", mess = message)
+    return render_template("image.html", mess = message, name = plot_path)
 
 def update_probs():
    
@@ -90,11 +90,12 @@ def make_plot(path_1, path_2):
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
             plt.text(x2, y, s)
-            
+    
+    plot = plt.show()
     path = '/var/data/plots/' + df2['timestamp'][0] + '.png'
     plt.savefig(path)
                 
     plt.savefig('static/images/new_plot.png')
         
-    return path
+    return plot
     
