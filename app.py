@@ -65,8 +65,8 @@ def make_plot(path_1, path_2):
     
     x_max = x_arr_new.max()
     x_min = x_arr_new.min()
-    y_max = y_arr_new.max()
-    y_min = y_arr_new.min()
+    y_max = y_arr.max()
+    y_min = y_arr.min()
     
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
