@@ -25,21 +25,25 @@ def plotview():
 
 def update_probs():
     
+    most_recent_timestamp = files[-1])['timestamp'][0]
+    most_recent_timestamp_rearr = most_recent_timestamp[12:16] + most_recent_timestamp[9:12] + most_recent_timestamp[17:21] + most_recent_timestamp[0:
     if pd.read_csv('/var/data/probs/' + files[-1])['timestamp'][0] != pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")['timestamp'][0]:
         df = pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")
         df = df.sort_values(by = 'total_ev')
 
         combined = pd.DataFrame({'biden_probs': df['evprob_chal'], 'trump_probs': df['evprob_inc']})
         combined.head()
-
-        df.to_csv('/var/data/probs/' + df['timestamp'][0] + '.csv')
+        
+        new_ts = df['timestamp'][0]
+        new_ts_rearr = new_ts[12:16] + new_ts[9:12] + new_ts[17:21] + new_ts[0:8]
+        df.to_csv('/var/data/probs/' + new_ts_rearr + '.csv')
 
         files = sorted(os.listdir('/var/data/probs/'))
 
-        message = ('new' + files[-1][:-4], '/var/data/probs/' + df['timestamp'][0] + '.csv')
+        message = ('new' + files[-1][:-4], '/var/data/probs/' + new_ts_rearr + '.csv')
         
     else:
-        latest_dt = datetime.datetime.strptime(files[-1][:-4], '%H:%M:%S %d %b %Y')
+        latest_dt = datetime.datetime.strptime(files[-1][:-4], '%b %d %Y %H:%M:%S')
         delta = datetime.datetime.now() - latest_dt
         if delta.total_seconds() // 3600 < 1:
             message = 'Done. Most recent update ' + str(round(delta.total_seconds()/60)) + ' minutes ago.', files[-1])
