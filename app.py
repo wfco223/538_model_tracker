@@ -84,7 +84,7 @@ def make_plot(path_1, path_2):
         if x2 <= -.01:
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
-            plt.text(-.05, y, s)
+            plt.text(x2, y, s)
             
                 
         elif x2 > .01:
