@@ -81,7 +81,7 @@ def make_plot(path_1, path_2):
     
     filepath = '/var/data/plots/' + df2['timestamp'][0] + '.png'
     
-    fig.save_fig(filepath)
+    fig.savefig(filepath)
                                           
     return filepath
     
