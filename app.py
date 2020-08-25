@@ -62,11 +62,7 @@ def make_plot(path_1, path_2):
     x_arr_old = differences_old['differences']
     x_arr_new = differences_new['differences'] 
     y_arr = differences_new['total_ev']
-    
-    
-    
-    print(xmin, xmax, ymin, ymax)
-    
+        
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
             plt.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
