@@ -23,7 +23,7 @@ def plotview():
     
     plot_path = make_plot(files[0], probs_path)
     
-    return render_template("image.html", mess = message)
+    return render_template("image.html", mess = message, filename = plot_path)
 
 def update_probs():
    
@@ -92,12 +92,14 @@ def make_plot(path_1, path_2):
             print(s)
             
     
-    plot = plt.show()
-    path = '/var/data/plots/' + df2['timestamp'][0] + '.png'
-    plt.savefig(path)
-                
-    plt.savefig('static/images/new_plot1.png')
+    
+    render_path = '/var/data/plots/' + df2['timestamp'][0] + '.png'
+    plt.savefig(render_path)
+    
+    static_path = 'static/images/' + df2['timestamp'][0] + '.png'
+    plt.savefig(static_path)
     plt.close()
-        
-    return plot
+    path = 'images/' + df2['timestamp'][0] + '.png'
+    
+    return path
     
