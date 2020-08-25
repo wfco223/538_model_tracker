@@ -75,6 +75,9 @@ def make_plot(path_1, path_2):
             axis.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
         else: 
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
+            
+        if abs(x2) > .01:
+           axis.annotate('ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%', (0, y), xycoords = 'figure points')
     
     path = '/var/data/plots' + df2['timestamp'][0] + '.png'
     fig.savefig(path)
