@@ -82,11 +82,9 @@ def make_plot(path_1, path_2):
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
             
         if x2 < -.01:
-            axis.text(0.1, 0.7, 'test', transform=axis.transAxes)
-            fig.text(0.1, 0.7, 'test', transform=axis.transAxes)
-            plt.text(0.1, 0.7, 'test', transform=axis.transAxes)
-            fig.text(-0.015, 300, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
-            plt.text(-0.015, 300, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
+            axis.text(x2, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
+            plt.text(x2, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
+            fig.text(x2, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
         elif x2 > .01:
             fig.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
             plt.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
