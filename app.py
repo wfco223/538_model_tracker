@@ -64,7 +64,7 @@ def make_plot(path_1, path_2):
     x_arr_new = differences_new['differences'] 
     y_arr = differences_new['total_ev']
     
-    plt.xlim(-.25, .25)   # set the xlim to left, right
+    plt.xlim(-.025, .025)   # set the xlim to left, right
     plt.ylim(269, 538)
     
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
@@ -83,7 +83,7 @@ def make_plot(path_1, path_2):
         if x2 <= -.01:
             s = str(y)
             print(s)
-            plt.annotate(s, (-.25, y))
+            plt.annotate(s, (-.025, y))
             
                 
         elif x2 > .01:
