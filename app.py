@@ -76,10 +76,10 @@ def make_plot(path_1, path_2):
 
         if x2 < 0:
             plt.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
-            plt.plot([xmin, x2], [y,y], '-', color = 'blue')
+            plt.plot([x_min, x2], [y,y], '-', color = 'blue')
         else: 
             plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
-            plt.plot([x2, xmax], [y,y], '-', color = 'red')
+            plt.plot([x2, x_max], [y,y], '-', color = 'red')
             
         if x2 <= -.01:
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
