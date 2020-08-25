@@ -59,8 +59,8 @@ def make_plot(path_1, path_2):
 
     axis.plot([0, 0], [268, 538], '--', color = 'black')
     
-    df1 = pd.read_csv(path_1)
-    df2 = pd.read_csv(path_2)
+    df1 = pd.read_csv('/var/data/probs/' + path_1)
+    df2 = pd.read_csv('/var/data/proba/' + path_2)
 
     differences_old = pd.DataFrame({'total_ev': df1['total_ev'], 'differences': df1['evprob_inc'] - df1['evprob_chal'], 'alpha': df1['evprob_inc'] + df1['evprob_chal']}).tail(269)
     differences_new = pd.DataFrame({'total_ev': df2['total_ev'], 'differences': df2['evprob_inc'] - df2['evprob_chal'], 'alpha': df2['evprob_inc'] + df2['evprob_chal']}).tail(269)
