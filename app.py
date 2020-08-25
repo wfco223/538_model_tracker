@@ -66,6 +66,7 @@ def make_plot(path_1, path_2):
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
             plt.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
+            plt.text(x2, y, 'test')
         else: 
             plt.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
 
