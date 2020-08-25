@@ -97,6 +97,7 @@ def make_plot(path_1, path_2):
     plt.savefig(path)
                 
     plt.savefig('static/images/new_plot.png')
+    plt.close()
         
     return plot
     
