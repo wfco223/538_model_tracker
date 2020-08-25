@@ -15,15 +15,15 @@ files = sorted(os.listdir('/var/data/probs/'))
 
 @app.route('/', methods = ["GET"])
 
-def plotview():
+def plotview(files):
     
-    message, probs_path = update_probs()
+    message, probs_path = update_probs(files)
     
     plot_path = make_plot(files[0], probs_path)
     
     return str(message + '\n' + '<img src = ' + plot_path + '>')
 
-def update_probs():
+def update_probs(files):
    
     if pd.read_csv('/var/data/probs/' + files[-1])['timestamp'][0] != pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")['timestamp'][0]:
         df = pd.read_csv("https://projects.fivethirtyeight.com/2020-general-data/presidential_ev_probabilities_2020.csv")
