@@ -21,7 +21,7 @@ def plotview():
     
     plot_path = make_plot(files[0], probs_path)
     
-    return str(message + '\n' + '<img src = ' + plot_path + '>')
+    return render_template("image.html", image=plot_path, mess = message)
 
 def update_probs():
    
