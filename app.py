@@ -91,7 +91,8 @@ def make_plot(path_1, path_2):
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
             
-    
+    for filename in os.listdir('static/'):
+        os.remove('static/' + filename)
     
     render_path = '/var/data/plots/' + df2['timestamp'][0] + '.png'
     plt.savefig(render_path)
