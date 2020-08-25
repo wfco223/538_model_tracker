@@ -51,9 +51,7 @@ def update_probs():
         
 def make_plot(path_1, path_2):
     
-    fig, axis = plt.subplots(nrows=1, ncols=1, figsize = (5, 10))  # create figure & 1 axis
-
-    axis.plot([0, 0], [268, 538], '--', color = 'black')
+    plt.plot([0, 0], [268, 538], '--', color = 'black')
     
     df1 = pd.read_csv('/var/data/probs/' + path_1)
     df2 = pd.read_csv(path_2)
@@ -65,35 +63,34 @@ def make_plot(path_1, path_2):
     x_arr_new = differences_new['differences'] 
     y_arr = differences_new['total_ev']
     
-    xmin, xmax = axis.get_xlim()
-    ymin, ymax = axis.get_ylim()
+    
     
     print(xmin, xmax, ymin, ymax)
     
     for (x1, x2, y, alpha) in zip(x_arr_old, x_arr_new, y_arr, differences_new['alpha']):
         if x2 < x1:
-            axis.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
+            plt.plot([x1, x2], [y, y], '-', color='blue', alpha = alpha/differences_new['alpha'].max())
         else: 
-            axis.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
+            plt.plot([x1, x2], [y, y], '-', color='red', alpha = alpha/differences_new['alpha'].max())
 
         if x2 < 0:
-            axis.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
+            plt.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
         else: 
-            axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
+            plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max(
         
         s = 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%'
+        print(s)
+                
         if x2 < -.01:
-            axis.text(float(x2), float(y), s)
-            plt.text(float(x2), float(y), s)
-            fig.text(float(x2), float(y), s)
+            plt.text(x2, y, s)
+                
         elif x2 > .01:
-            fig.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
-            plt.text(xmax, y, 'ev: ' + str(y) + 'net prob: ' + str(x2 * 100) + '%')
+            plt.text(x2, y, s)
             
     path = '/var/data/plots' + df2['timestamp'][0] + '.png'
-    fig.savefig(path)
+    plt.savefig(path)
                 
-    fig.savefig('static/images/plot.png')
+    plt.savefig('static/images/plot.png')
     filepath = 'static/images/plot.png'
     
     return filepath
