@@ -65,7 +65,7 @@ def make_plot(path_1, path_2):
     y_arr = differences_new['total_ev']
     
     top_five = x_arr_new.sort_values()
-    print(top_five[0], top_five[1], top_five[-2], top_five[-1])
+    print(top_five.values)
     
     plt.xlim(-.025, .025)   # set the xlim to left, right
     plt.ylim(269, 538)
