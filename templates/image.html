@@ -1,8 +1,10 @@
 <!doctype html>
 <html>
    <body>
-
-      <img src = "{{ url_for('static', filename='img1.png') }}" >
+      
+      <p> "{{ mess }}"
+      
+      <img src = "{{ url_for('static', filename="{{plot_path}}") }}" >
 
    </body>
 </html>
