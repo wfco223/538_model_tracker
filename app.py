@@ -21,7 +21,7 @@ def plotview():
     
     plot_path = make_plot(files[0], probs_path)
     
-    return render_template("image.html", image=plot_path, mess = message)
+    return render_template("image.html", mess = message)
 
 def update_probs():
    
@@ -79,9 +79,11 @@ def make_plot(path_1, path_2):
         else: 
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
     
-    filepath = 'static/images/' + df2['timestamp'][0] + '.png'
+    path = '/var/data/plots' + df2['timestamp'][0] + '.png'
+    fig.savefig(path)
+                
+    fig.savefig('static/images/plot.png')
+    filepath = 'static/images/plot.png'
     
-    fig.savefig(filepath)
-                                          
     return filepath
     
