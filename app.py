@@ -84,7 +84,7 @@ def make_plot(path_1, path_2):
         if x2 <= -.01:
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
-            plt.annotate(s, (0, y/270), xycoords = 'figure fraction')
+            plt.annotate(s, (x2, y))
             
                 
         elif x2 > .01:
