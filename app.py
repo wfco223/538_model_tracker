@@ -76,20 +76,21 @@ def make_plot(path_1, path_2):
 
         if x2 < 0:
             plt.plot(x2, y, 'o', color = 'blue', alpha = alpha/differences_new['alpha'].max())
-            plt.plot([x_min, x2], [y,y], '-', color = 'blue')
+            
         else: 
             plt.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
-            plt.plot([x2, x_max], [y,y], '-', color = 'red')
+            
             
         if x2 <= -.01:
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
-            plt.text(y, x2, s, bbox=dict(facecolor='red', alpha=0.5))
+            plt.text(-.05, y, s)
+            
                 
         elif x2 > .01:
             s = 'ev: ' + str(y) + ' net prob: ' + str(abs(round(x2 * 100, 2))) + '%'
             print(s)
-            plt.text(x2, y, s)
+            
     
     plot = plt.show()
     path = '/var/data/plots/' + df2['timestamp'][0] + '.png'
