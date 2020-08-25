@@ -79,7 +79,7 @@ def make_plot(path_1, path_2):
         else: 
             axis.plot(x2, y, 'o', color = 'red', alpha = alpha/differences_new['alpha'].max())
     
-    filepath = '/var/data/plots/' + df2['timestamp'][0] + '.png'
+    filepath = 'static/images/' + df2['timestamp'][0] + '.png'
     
     fig.savefig(filepath)
                                           
