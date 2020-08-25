@@ -51,7 +51,7 @@ def update_probs():
         
 def make_plot(path_1, path_2):
     
-    fig, axis = plt.subplots(nrows=1, ncols=1, figsize = (10, 20))  # create figure & 1 axis
+    fig, axis = plt.subplots(nrows=1, ncols=1, figsize = (5, 10))  # create figure & 1 axis
 
     axis.plot([0, 0], [268, 538], '--', color = 'black')
     
