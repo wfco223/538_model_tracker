@@ -15,6 +15,8 @@ app = Flask(__name__)
 
 def plotview():
     
+    files = sorted(os.listdir('/var/data/probs/'))
+    
     message, probs_path = update_probs()
     
     plot_path = make_plot(files[0], probs_path)
